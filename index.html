@@ -9,7 +9,9 @@
   'FILL' 0,
   'wght' 400,
   'GRAD' 0,
-  'opsz' 24
+  'opsz' 24;
+  /*font-size: 4vw;*/
+  font-size: max(30px, 3.5vw);
 }
 span{
 position:absolute;
@@ -17,11 +19,13 @@ top:89%;
 left:5%;
 color:#4382ec;
 transition:0.5s;
+cursor:pointer;
 }
 span:hover{
 transition:0.5s;
 transform:rotate(-40deg);
 color:#5a91ed;
+cursor:pointer;
 }
 </style>
 <style>
@@ -36,16 +40,20 @@ border-radius:25px;
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+max-width:500px;
+max-height:500px;
 }
 button:hover {
    background-color: #5a91ed;
    transition:0.4s;
+   cursor:pointer;
 }
 
 button:active {
    background-color: #427ddf;
    box-shadow: none;
    transition:0.4s;
+   cursor:pointer;
 }
 button{
  position: absolute;
@@ -63,6 +71,9 @@ height:5vw;
 box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
 transition: background-color 0.4s , box-shadow 0.4s;
 font-family: Arial;
+max-width:300px;
+max-height:50px;
+cursor:pointer;
 }
 input[type=number]::-webkit-inner-spin-button, 
 input[type=number]::-webkit-outer-spin-button { 
@@ -99,7 +110,7 @@ font-family: Arial black;
 <body>
 
 <div id="div">
-<span class="material-symbols-outlined">
+<span onclick="restart()" class="material-symbols-outlined">
 restart_alt
 </span>
 <input id="invul" type="number">
@@ -107,21 +118,38 @@ restart_alt
 </div>
 <script>
 var seconden;
+var minuten;
 var verder = 0;
+var reset = 0;
 function start(){
-var minuten = document.getElementById("invul").value;
+reset = 0;
+minuten = document.getElementById("invul").value;
 seconden = minuten * 60;
-setInterval(begin, 1000);
+timer = setInterval(begin, 1000);
 //begin();
 }
 function begin(){
 seconden = seconden - 1;
-if (seconden < 1){
+if (seconden < 1 && reset === 0){
 document.getElementById("div").style.backgroundColor = "#f16543";
 document.getElementById("invul").style.color = "#ffffff";
+clearInterval(timer); // Stop de timer als het klaar is
+return;
+}
+if (reset === 1){
 return;
 }
 document.getElementById("invul").value = seconden;
+}
+function restart(){
+seconden = 0
+reset = 1;
+clearInterval(timer);
+document.getElementById("div").style.backgroundColor = "#e2eeff";
+document.getElementById("invul").style.color = "#1b3041";
+document.getElementById("invul").value = minuten;
+document.getElementById("div").style.backgroundColor = "#e2eeff";
+document.getElementById("invul").style.color = "#1b3041";
 }
 </script>
 </body>
