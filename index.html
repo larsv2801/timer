@@ -90,6 +90,7 @@ background-color:rgba(0,0,0,0);
 height:35vw;
 max-height:350px;
 width:30vw;
+max-width:300px;
 position: absolute;
 top: 50%;
 left: 50%;
@@ -106,6 +107,15 @@ body{
 background-color:#bbd6fd;
 font-family: Arial black;
 }
+#minuten{
+position:absolute;
+top: 9%;
+left: 50%;
+-ms-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+color:#1b3041;
+font-family: Arial black;
+}
 </style>
 </head>
 <body>
@@ -114,6 +124,7 @@ font-family: Arial black;
 <span onclick="restart()" class="material-symbols-outlined">
 restart_alt
 </span>
+<p id="minuten"></p>
 <input id="invul" type="number">
 <button onclick="start()">start</button>
 </div>
@@ -122,6 +133,7 @@ var seconden;
 var minuten;
 var verder = 0;
 var reset = 0;
+var minutennog = 0;
 function start(){
 reset = 0;
 minuten = document.getElementById("invul").value;
@@ -130,12 +142,27 @@ timer = setInterval(begin, 1000);
 //begin();
 }
 function begin(){
+if (seconden > 60){
+for(let i = 0; i < minuten; i++){
+if(seconden > 60){
+seconden -= 60;
+minutennog += 1;
+}
+}
+document.getElementById("minuten").innerHTML = minutennog;
+}
 seconden = seconden - 1;
-if (seconden < 1 && reset === 0){
+if (seconden < 1 && reset === 0 && minutennog < 1){
 document.getElementById("div").style.backgroundColor = "#f16543";
 document.getElementById("invul").style.color = "#ffffff";
 clearInterval(timer); // Stop de timer als het klaar is
 return;
+}
+if(seconden < 1 && minutennog > 0){
+minutennog -= 1;
+seconden = 60;
+document.getElementById("minuten").innerHTML = minutennog;
+document.getElementById("invul").value = seconden;
 }
 if (reset === 1){
 return;
@@ -145,7 +172,9 @@ document.getElementById("invul").value = seconden;
 function restart(){
 seconden = 0
 reset = 1;
+minutennog = 0;
 clearInterval(timer);
+document.getElementById("minuten").innerHTML = "";
 document.getElementById("div").style.backgroundColor = "#e2eeff";
 document.getElementById("invul").style.color = "#1b3041";
 document.getElementById("invul").value = minuten;
