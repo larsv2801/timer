@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -115,10 +116,28 @@ transform: translate(-50%, -50%);
 color:#1b3041;
 font-family: Arial black;
 }
+#streakdiv{
+position:absolute;
+top:9vw;
+left:9vw;
+background-color:white;
+border-radius:15px;
+width:15vw;
+height:15vw;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+#streak{
+color:black;
+font-family:arial black;
+}
 </style>
 </head>
-<body>
-
+<body onload="lod();">
+<div id="streakdiv">
+<p id="streakdag">1</p>
+</div>
 <div id="div">
 <span onclick="restart()" class="material-symbols-outlined">
 restart_alt
@@ -128,6 +147,18 @@ restart_alt
 <button onclick="start()">start</button>
 </div>
 <script>
+function lod(){
+var streak = localStorage.getItem('strea');
+ if (streak) {
+ parseInt(streak);
+ streak = streak;
+ streak++;
+  document.getElementById("streakdag").innerHTML = streak + "🔥";
+ } else {
+ var jef = 0;
+localStorage.setItem("strea", jef);
+ }
+}
 var seconden;
 var minuten;
 var verder = 0;
