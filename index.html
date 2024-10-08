@@ -137,6 +137,9 @@ font-family:arial black;
 <body onload="lod();">
 <div id="streakdiv">
 <p id="streakdag"></p>
+<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script> 
+
+    <dotlottie-player src="https://lottie.host/077e55ee-c774-45de-b340-85dbc83a2ccf/XgvscOvxNc.json" background="transparent" speed="1" style="width: 4.5vw; height: 4.5vw;" autoplay></dotlottie-player>
 </div>
 <div id="div">
 <span onclick="restart()" class="material-symbols-outlined">
@@ -152,8 +155,8 @@ var streak = localStorage.getItem('strea');
  if (streak) {
  parseInt(streak);
  streak = streak;
- streak++;
-  document.getElementById("streakdag").innerHTML = streak + "🔥";
+ streak++;  
+  document.getElementById("streakdag").innerHTML = streak;
   localStorage.setItem("strea", streak);
  } else {
  var jef = 0;
