@@ -136,7 +136,7 @@ font-family:arial black;
 </head>
 <body onload="lod();">
 <div id="streakdiv">
-<p id="streakdag">1</p>
+<p id="streakdag"></p>
 </div>
 <div id="div">
 <span onclick="restart()" class="material-symbols-outlined">
@@ -154,9 +154,11 @@ var streak = localStorage.getItem('strea');
  streak = streak;
  streak++;
   document.getElementById("streakdag").innerHTML = streak + "🔥";
+  localStorage.setItem("strea", streak);
  } else {
  var jef = 0;
 localStorage.setItem("strea", jef);
+document.getElementById("streakdag").innerHTML = "0🔥";
  }
 }
 var seconden;
